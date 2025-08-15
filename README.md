@@ -28,11 +28,11 @@ exceptions as appropriate.
 [X] The disconnect method will take two integers indicating the elements to disconnect. This method should
 throw exceptions as appropriate.
 
-[] The query method will take two integers indicating the elements to (disconnect? Maybe check?). This method should throw
+[X] The query method will take two integers indicating the elements to (disconnect? Maybe check?). This method should throw
 exceptions as appropriate. It should return true if the elements are connected, directly or indirectly, and
 false if the elements are not connected.
 
-[] The levelConnetion method will also take two integers and should also throw an exception as appropriate,
+[X] The levelConnetion method will also take two integers and should also throw an exception as appropriate,
 returning an integer value. It should return 0 if the elements are not connected, 1 if the elements are
 directly connected and 2 or more when elements are indirectly connect, returning the number that
 represents how many connections there are between the searched elements.
