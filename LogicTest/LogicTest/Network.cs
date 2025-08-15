@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace LogicTest;
 
@@ -22,7 +23,7 @@ public class Network
 
         for (int i = 0; i < numberOfElements; i++)
         {
-            _graph[i] = new List<int>();
+            _graph[i] = new();
         }
     }
 
@@ -86,6 +87,16 @@ public class Network
 
     public int LevelConnection(int nodeA, int nodeB)
     {
+        if (IsDirectlyConnected(nodeA, nodeB))
+        {
+            return 1;
+        }
+
+        if( IsUndirectlyConnected(nodeA,nodeB))
+        {
+            return 2;
+        }
+
         return 0;
     }
 
@@ -94,15 +105,39 @@ public class Network
 
     public bool IsUndirectlyConnected(int nodeA, int nodeB)
     {
-        return false;
-    }
-    public void PrintGraph()
-    {
-        for (int i = 0; i < _graph.Length; i++)
+        if (IsDirectlyConnected(nodeA,nodeB))
         {
-            string nodeConections = String.Join(", ",_graph[i].Select(x => x +1));
-            Console.Write($"{i + 1}: ");
-            Console.WriteLine(nodeConections);
+            return false;
         }
+
+        HashSet<int> allNodesConnected = new();
+
+        Stack<int> stack = new();
+
+        stack.Push(nodeA-1);
+
+        do
+        {
+            var currentNode = stack.Pop();
+
+            if(currentNode == nodeB-1)
+            {
+                return true;
+            }
+
+
+            if (!allNodesConnected.Contains(currentNode))
+            {
+                allNodesConnected.Add(currentNode);
+                foreach (var neighborNode in _graph[currentNode])
+                {
+                    stack.Push(neighborNode);
+                }
+            }
+
+        }
+        while (stack.Count > 0);
+
+        return false;
     }
 }
