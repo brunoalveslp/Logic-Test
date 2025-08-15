@@ -7,7 +7,6 @@ internal class Program
     static void Main(string[] args)
     {
         Network net = new(8);
-        string res = "No";
 
         // Test connecting nodes 1-2, 6-2, 2-4, 5-8
         Console.WriteLine("Connecting nodes: 1-2, 6-2, 2-4, 5-8 ");

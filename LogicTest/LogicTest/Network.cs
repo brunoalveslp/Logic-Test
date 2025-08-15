@@ -29,10 +29,7 @@ public class Network
 
     public void Connect(int nodeA, int nodeB)
     { 
-        if(nodeA < 0 || nodeB < 0 || nodeA == nodeB)
-        {
-            throw new ArgumentException("The nodes must have values greather than zero and not equal.");
-        }
+        AreNodesValid(nodeA, nodeB);
 
         if (!IsDirectlyConnected(nodeA,nodeB))
         {
@@ -48,10 +45,7 @@ public class Network
 
     public void Disconnect(int nodeA, int nodeB)
     {
-        if (nodeA < 0 || nodeB < 0 || nodeA == nodeB)
-        {
-            throw new ArgumentException("The nodes must have values greather than zero and not equal.");
-        }
+        AreNodesValid(nodeA, nodeB);
 
         if(IsDirectlyConnected(nodeA,nodeB))
         {
@@ -67,10 +61,7 @@ public class Network
     {
         bool result = false;
 
-        if (nodeA < 0 || nodeB < 0 || nodeA == nodeB)
-        {
-            throw new ArgumentException("The nodes must have values greather than zero and not equal.");
-        }
+        AreNodesValid(nodeA, nodeB);
 
         if (IsDirectlyConnected(nodeA, nodeB))
         {
@@ -87,6 +78,9 @@ public class Network
 
     public int LevelConnection(int nodeA, int nodeB)
     {
+        AreNodesValid(nodeA, nodeB);
+
+
         if (IsDirectlyConnected(nodeA, nodeB))
         {
             return 1;
@@ -139,5 +133,18 @@ public class Network
         while (stack.Count > 0);
 
         return false;
+    }
+
+    public void AreNodesValid(int nodeA,int nodeB)
+    {
+        if (nodeA <= 0 || nodeA > _graph.Length || nodeB <= 0 || nodeB > _graph.Length)
+        {
+            throw new ArgumentOutOfRangeException($"The values must be between 1 and {_graph.Length}");
+        }
+
+        if(nodeA == nodeB)
+        {
+            throw new ArgumentException("The values must be different.");
+        }
     }
 }
