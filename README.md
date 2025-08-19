@@ -20,7 +20,7 @@ TASK
 [X] The constructor should take a positive integer value indicating the number of elements in the set. Passing
 an invalid value should throw an exception.
 
-[] The class should also provide four public methods, connect, disconnect, query and levelConnection.
+[X] The class should also provide four public methods, connect, disconnect, query and levelConnection.
 
 [X] The connect method will take two integers indicating the elements to connect. This method should throw
 exceptions as appropriate.
